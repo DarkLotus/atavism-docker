@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+  atavism:
+    build: 
+      context: ./bin/atavism
+    container_name: 'atavism-2019.1.2'
+    restart: 'always'
+    ports:
+      - "9005:9005"
+      - "9010:9010"
+      - "5090:5090"
+      - "5042:5042"
+      - "20377:20377"
+      - "5052:5052"
+      - "5067:5067"
+      - "5041:5041"
+    links: 
+      - mysql
+    volumes: 
+      - ${ATAVISM_PATH-./atavism_server}:/root
+    stdin_open: true
+    tty: true
+
+
+  mysql:
+    build: ./bin/mysql
+    container_name: '5.7-mysql-atavism'
+    restart: 'always'
+    ports:
+      - "3306:3306"
+    volumes: 
+      - ${MYSQL_DATA_DIR-./data/mysql}:/var/lib/mysql
+      - ${MYSQL_LOG_DIR-./logs/mysql}:/var/log/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: tiger
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: 'sc-phpmyadmin'
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - '8080:80'
+    volumes: 
+      - /sessions
