@@ -8,13 +8,13 @@ This is a basic Atavism Docker environment built using Docker Compose. It consis
 
 ## Installation
 
-Clone this repository on your local computer. Run the `docker-compose up -d`.
+Clone this repository on your local computer.
 
 ```shell
-git clone https://github.com/sprintcube/docker-compose-lamp.git
-cd docker-compose-lamp/
+git clone https://github.com/DarkLotus/atavism-docker
+cd atavism-docker/
 git fetch --all
-git checkout 7.1.x
+git checkout master
 docker-compose up -d
 ```
 
@@ -28,6 +28,14 @@ Change the following:
 
 Follow below instructions for phpmyadmin access to upload your database contents.
 
+## phpMyAdmin
+
+phpMyAdmin is configured to run on port 8080. Use following default credentials.
+
+http://localhost:8080/  
+username: root  
+password: tiger
+
 #### Connect via SSH
 
 You can connect to web server using `docker exec` command to perform various operation on it. Use below command to login to container via ssh.
@@ -36,7 +44,7 @@ You can connect to web server using `docker exec` command to perform various ope
 docker exec -it atavism-2019.1.2 /bin/bash
 ```
 
-Once connected you can run your server by connecting via SSH and running:
+Once connected you can run your server by running:
 
 ```shell
 cd /root/bin
@@ -49,13 +57,6 @@ Docker should auto start these but my docker skills have not worked that out yet
 
 To shut down run docker-compose down
 
-## phpMyAdmin
-
-phpMyAdmin is configured to run on port 8080. Use following default credentials.
-
-http://localhost:8080/  
-username: root  
-password: tiger
 
 ## Connecting to your server
 
